@@ -41,7 +41,7 @@ public class AmazonAutomationExample {
 		
 		driver = new ChromeDriver(options);
 
-		driver.get("http://www.amazon.com");
+		driver.get("https://www.amazon.com");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		
@@ -59,6 +59,8 @@ public class AmazonAutomationExample {
 		}
 		
 		GeneralAmazon.goToCart(driver).click();
+		ShoppingCartPage.assertOnAmazonCartPage(driver);
+		System.out.println("PASS: We are on the shopping car page.");
 		numberOfItems = ShoppingCartPage.numberOfItemsInCart(driver).size();
 		ShoppingCartPage.assertShoppingCartSize(driver, totalSearchTerms, numberOfItems);
 		System.out.println("PASS: The number of items in the cart is " + totalSearchTerms);
@@ -72,6 +74,8 @@ public class AmazonAutomationExample {
 		System.out.println("PASS: " + itemName + " was removed from Shopping Cart.");		
 		
 		GeneralAmazon.goToCart(driver).click();
+		ShoppingCartPage.assertOnAmazonCartPage(driver);
+		System.out.println("PASS: We are on the shopping car page.");
 		numberOfItems = ShoppingCartPage.numberOfItemsInCart(driver).size();
 		ShoppingCartPage.assertShoppingCartSize(driver, totalSearchTerms-1, numberOfItems);
 		System.out.println("PASS: The number of items in the cart is " + (totalSearchTerms-1));		
@@ -85,9 +89,15 @@ public class AmazonAutomationExample {
 		GeneralAmazon.searchBar(driver).sendKeys(searchTerm);
 		GeneralAmazon.searchButton(driver).click();
 		
+		SearchPage.assertOnAmazonSearchPage(driver);
+		System.out.println("PASS: We are on the search page.");
+		
 		SearchPage.firstSearchResult(driver).click();
 		
 		String itemAsin = ItemListPage.asinForItem(driver).getAttribute("value");
+		ItemListPage.assertOnAmazonItemListPage(driver);
+		System.out.println("PASS: We are on the item list.");
+		
 		
 		if(takeScreenshot) {
 			// Take screenshot and store as a file format
@@ -102,6 +112,9 @@ public class AmazonAutomationExample {
 		
 		ItemListPage.addToCart(driver).click();
 		ItemListPage.clickDenyProtectionIfExists(driver);
+		
+		ItemListPage.assertOnAmazonItemAddedToCartPage(driver);
+		System.out.println("PASS: We are on the item added to cart page.");
 		
 		return itemAsin;
 		

@@ -59,6 +59,19 @@ public class ShoppingCartPage  {
 			driver.quit();
 		}
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static void assertOnAmazonCartPage(ChromeDriver driver) {
+		
+		String fullUrl = driver.getCurrentUrl();
+		
+		try {
+			Assert.assertEquals(true, fullUrl.startsWith("https://www.amazon.com/gp/cart/"));
+		} catch (AssertionError ex) {
+			System.out.println("FAIL! The exception was: " + ex.getMessage());
+			driver.quit();
+		}
+	}
 }
 
 
