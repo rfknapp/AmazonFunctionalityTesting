@@ -60,7 +60,7 @@ public class AmazonAutomationExample {
 		
 		GeneralAmazon.goToCart(driver).click();
 		ShoppingCartPage.assertOnAmazonCartPage(driver);
-		System.out.println("PASS: We are on the shopping car page.");
+		System.out.println("PASS: We are on the shopping cart page.");
 		numberOfItems = ShoppingCartPage.numberOfItemsInCart(driver).size();
 		ShoppingCartPage.assertShoppingCartSize(driver, totalSearchTerms, numberOfItems);
 		System.out.println("PASS: The number of items in the cart is " + totalSearchTerms);
@@ -75,7 +75,7 @@ public class AmazonAutomationExample {
 		
 		GeneralAmazon.goToCart(driver).click();
 		ShoppingCartPage.assertOnAmazonCartPage(driver);
-		System.out.println("PASS: We are on the shopping car page.");
+		System.out.println("PASS: We are on the shopping cart page.");
 		numberOfItems = ShoppingCartPage.numberOfItemsInCart(driver).size();
 		ShoppingCartPage.assertShoppingCartSize(driver, totalSearchTerms-1, numberOfItems);
 		System.out.println("PASS: The number of items in the cart is " + (totalSearchTerms-1));		
